@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 48" fill="none">
+  <!-- Modern Geometric Symbol: Shield with growth bars & people arc -->
+  <rect x="2" y="4" width="40" height="40" rx="10" fill="url(#brandGrad)" />
+  <path d="M14 26C14 20.4772 18.4772 16 24 16C29.5228 16 34 20.4772 34 26" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="24" cy="14" r="4" fill="#FFFFFF"/>
+  <path d="M19 28H29M24 23V33" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
+  
+  <!-- Brand Text -->
+  <text x="52" y="31" font-family="Plus Jakarta Sans, Inter, -apple-system, sans-serif" font-size="24" font-weight="800" letter-spacing="-0.5" fill="#0F172A">Ce<tspan fill="#0D9488">dur</tspan></text>
+  
+  <defs>
+    <linearGradient id="brandGrad" x1="2" y1="4" x2="42" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0D9488"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+  </defs>
+</svg>

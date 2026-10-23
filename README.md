@@ -1,79 +1,129 @@
-# 💼 CEDUR - Smart HR & Payroll SaaS Platform
+# Cedur - HR & Payroll Platform for Indian SMEs
 
-**[🚀 Live Project →](https://cedur-murex.vercel.app/)**  
-CEDUR is a modern, responsive, and user-friendly SaaS application that helps businesses streamline their HR processes including payroll, employee management, time tracking, hiring, and onboarding.
-
-Built with ❤️ using React and Tailwind CSS, CEDUR aims to empower businesses to **Outthink | Outwork | Outlast** the competition.
+An original full-stack Human Resources and Payroll SaaS platform built specifically for Indian businesses. Automates statutory compliance (EPF, ESIC, Professional Tax, TDS under Section 192), GPS geofenced mobile attendance, leave approvals, and employee self-service.
 
 ---
 
-## 🚀 Features
+## Key Modules & Features
 
-- 🧑‍💼 People Platform – Manage employees with ease  
-- 💸 Payroll – Run smart, fast payrolls  
-- 🕒 Time & Attendance – Track shifts, leaves, and hours  
-- 📥 Hiring & Onboarding – Simplify recruitment and onboarding  
-- 📊 Dashboard – Clean and intuitive UI for admins  
-- 🌐 Fully responsive design (mobile-first)
+1. **Indian Payroll Engine**:
+   - 1-click monthly salary processing.
+   - EPF calculation (12% split between EPF & EPS with ₹1,250 cap, EDLI, and admin charges).
+   - ESIC calculation (0.75% employee + 3.25% employer contributions).
+   - State Professional Tax (PT matrices for 28+ states and union territories).
+   - Section 192 TDS deduction supporting both the default New Tax Regime (Section 115BAC) and Old Tax Regime with Chapter VI-A investment declarations.
+   - Bank-ready batch disbursement files (ICICI, HDFC, SBI, Axis, Kotak, NEFT/RTGS).
+   - Automatic Electronic Challan cum Return (ECR) text generation for EPFO and ESIC filing.
+
+2. **Workforce & Core HR**:
+   - Centralized employee directory with Aadhaar/PAN compliance vault.
+   - Digital onboarding checklists.
+   - Dynamic HR letter generation (offer, increment, relieving certificates).
+
+3. **Leave & Attendance**:
+   - Multi-level leave approval hierarchies and sandwich rule controls.
+   - Biometric fingerprint/face scanner API synchronization.
+   - Rotational shift rostering, late-mark rules, and overtime (OT) tracking.
+   - Automatic Loss of Pay (LOP) payroll linkage.
+
+4. **GPS Geofence Attendance**:
+   - Virtual perimeter check-in (20m to 1000m radius) with live selfie validation.
+   - Zero physical biometric hardware investment required.
+   - Ideal for multi-store retail, factories, and field sales teams.
+
+5. **Employee Self-Service (ESS)**:
+   - Password-protected PDF salary slip downloads.
+   - Annual Form 16 Part A and Part B downloads.
+   - Online tax declarations with proof uploads.
+   - Leave and expense reimbursement claim tracker.
+
+6. **Enterprise Security & Compliance**:
+   - Full alignment with Indian Digital Personal Data Protection (DPDP) Act 2023.
+   - In-transit TLS 1.3 and at-rest AES-256 encryption.
+   - Local database hosting within India (AWS Mumbai).
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-- ⚛️ React  
-- 🎨 Tailwind CSS  
-- 📦 Vite (or CRA, specify if applicable)  
-- 🔗 React Router DOM (for routing)
+- **Frontend**: React 18, Vite, Tailwind CSS, Lucide Icons, React Router DOM.
+- **Backend**: Node.js, Express.js, Zod validation, bcryptjs password hashing, cookie-parser, express-rate-limit.
+- **Database & ORM**: Neon Serverless PostgreSQL with Drizzle ORM (`@neondatabase/serverless`, `drizzle-orm`).
+  *(Includes resilient in-memory fallback store when running locally without active Neon credentials).*
 
 ---
 
-## 📁 Folder Structure (Example)
+## Getting Started
+
+### 1. Install Dependencies
 
 ```bash
-CEDUR/
-├── backend/
-│   ├── models/
-│   └── routes/
-│   └── node_modules/
-│   └── server.js
-│   └── .env
-│   └── package.json
-│   └── package-lock.json
-├── public/
-├── src/
-├── .env
-├── .env.production
-├── .gitignore
-├── about.html
-├── eslint.config.js
-├── index.html
-├── package.json
-├── package-lock.json
-├── postcss.config.js
-├── README.md
-├── server.js
-├── signin.html
-├── tailwind.config.js
-├── vite.config.js
-└── node_modules/
-
-
-
-🚧 Setup Instructions
-
-1.Clone the repo
-git clone https://github.com/Legends0024/CEDUR.git
-cd CEDUR
-
-
-2.Install dependencies
+# Frontend dependencies
 npm install
 
+# Backend dependencies
+cd backend
+npm install
+cd ..
+```
 
-3.Run the development server
+### 2. Configure Environment Variables
+
+**Backend (`backend/.env`):**
+```env
+PORT=5000
+NODE_ENV=development
+APP_URL=http://localhost:5173
+JWT_SECRET=your-random-32-character-secret-key-for-sessions
+
+# Neon PostgreSQL Connection String (from https://console.neon.tech)
+DATABASE_URL=postgresql://user:password@ep-name.region.aws.neon.tech/neondb?sslmode=require
+```
+
+**Frontend (`.env`):**
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+### 3. Database Migrations & Seeding (Neon Postgres)
+
+```bash
+cd backend
+
+# Push schema directly to Neon Postgres
+npm run db:push
+
+# Seed admin user, sample company, sample employees, and blog posts
+npm run db:seed
+```
+
+### 4. Running the Development Servers
+
+```bash
+# Terminal 1: Run frontend (from root directory)
 npm run dev
 
+# Terminal 2: Run backend (from backend directory)
+cd backend
+npm run dev
+```
 
-🔗 Live Demo
-Visit the live application here:
-👉 https://cedur-murex.vercel.app/
+- **Frontend Application**: `http://localhost:5173`
+- **Backend API**: `http://localhost:5000`
+- **API Health Check**: `http://localhost:5000/api/health`
+
+### 5. Default Credentials
+
+- **Admin Email**: `admin@cedur.com`
+- **Password**: `Password123!`
+
+---
+
+## Brand Customization
+
+To customize branding parameters, edit `src/config/brand.js`:
+- `BRAND_NAME`: Brand display name.
+- `TAGLINE`: Headline and pitch.
+- `PRIMARY_COLOR`: Theme palette accent.
+- `SUPPORT_EMAIL`, `SUPPORT_PHONE`, `OFFICE_ADDRESS`: Contact touchpoints.
+- `LOGO_PATH`: Place your custom logo in `public/images/logo.svg`.
